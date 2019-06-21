@@ -34,4 +34,32 @@ public class MainController {
     public ResponseEntity<?> getAllAuthors(@PageableDefault(page=0, size=5) Pageable pageable) {
         return new ResponseEntity<>(authorService.findAll(pageable), HttpStatus.OK);
     }
+
+    @PutMapping(value = "/data/books/{id}")
+    public ResponseEntity<?> updateBook(
+            @RequestBody
+                    Book updatedBook,
+            @PathVariable
+                    long bookid) {
+        bookService.update(updatedBook, bookid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/data/books{bookid}/authors{authid}",
+            consumes = {"application/json"},
+            produces = {"application/json"})
+    public ResponseEntity<?> assignBookToAuthor(@PathVariable Long bookid,
+                                                @PathVariable Long authid) throws URISyntaxException {
+
+        bookService.assignBookToAuthor(bookid, authid);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/data/books/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable long id) {
+        bookService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
