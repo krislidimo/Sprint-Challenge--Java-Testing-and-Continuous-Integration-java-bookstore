@@ -67,7 +67,7 @@ public class BookServiceImpl implements BookService {
             currentBook.setCopy(book.getCopy());
         }
 
-        return bookRepository.save(currentBook);
+        return currentBook;
     }
 
     @Transactional

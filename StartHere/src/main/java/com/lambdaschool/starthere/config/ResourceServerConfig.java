@@ -39,7 +39,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
                 )
                 .permitAll()
                 .antMatchers("/users/**", "/oauth/revoke-token").authenticated()
-                .antMatchers("/actuator/**", "/**").hasAnyRole("ADMIN")
+                .antMatchers("/actuator/**", "/books/**", "/**").hasAnyRole("ADMIN")
                 .antMatchers("/books", "/authors").hasAnyRole("USER")
                 .antMatchers("/books", "/authors").hasAnyRole("DATA")
                 .and()
