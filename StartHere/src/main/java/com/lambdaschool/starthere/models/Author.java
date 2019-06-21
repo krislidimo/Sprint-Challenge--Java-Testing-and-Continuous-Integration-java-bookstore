@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Authors")
+@Table(name = "authors")
 public class Author extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,18 +18,23 @@ public class Author extends Auditable{
 
     @ManyToMany
     @JoinTable(name = "authorbooks",
-                joinColumns = {@JoinColumn(name = "bookid")},
-                inverseJoinColumns = {@JoinColumn(name = "authorid")})
+                joinColumns = {@JoinColumn(name = "authorid")},
+                inverseJoinColumns = {@JoinColumn(name = "bookid")})
     @JsonIgnoreProperties("authors")
-    private List<Book> books = new ArrayList<Book>();
+    private List<Book> books = new ArrayList<>();
 
     public Author() {
     }
 
-    public Author(String lastname, String firstname, List<Book> books) {
-        this.lastname = lastname;
+    public Author(String firstname, String lastname) {
         this.firstname = firstname;
-        this.books = books;
+        this.lastname = lastname;
+    }
+
+    public Author(Long authorid, String firstname, String lastname) {
+        this.authorid = authorid;
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
     public long getAuthorid() {

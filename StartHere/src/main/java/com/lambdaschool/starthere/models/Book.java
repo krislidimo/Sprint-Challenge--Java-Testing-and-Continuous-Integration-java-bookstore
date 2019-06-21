@@ -2,13 +2,12 @@ package com.lambdaschool.starthere.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "books")
 public class Book extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,11 +24,17 @@ public class Book extends Auditable {
     public Book() {
     }
 
-    public Book(String booktitle, String isbn, int copy, List<Author> authors) {
+    public Book(String booktitle, String isbn, int copy) {
         this.booktitle = booktitle;
         this.isbn = isbn;
         this.copy = copy;
-        this.authors = authors;
+    }
+
+    public Book(Long bookid, String booktitle, String isbn, int copy) {
+        this.bookid = bookid;
+        this.booktitle = booktitle;
+        this.isbn = isbn;
+        this.copy = copy;
     }
 
     public long getBookid() {
